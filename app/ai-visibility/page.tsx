@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/site/site-header'
 export const metadata: Metadata = {
   title: 'AI Visibility Assessment | OrangeRank',
   description:
-    'OrangeRank measures how AI systems like ChatGPT, Gemini, Claude, Perplexity and Google AI Overviews see, describe, cite and recommend your business. Get your Orange Score.',
+    'For local, consumer-facing businesses. OrangeRank measures how ChatGPT, Gemini, Claude, Perplexity and Google AI Overviews see, describe, cite and recommend your business. Get your Orange Score.',
   alternates: { canonical: '/ai-visibility' },
 }
 import { Hero } from '@/components/site/hero'

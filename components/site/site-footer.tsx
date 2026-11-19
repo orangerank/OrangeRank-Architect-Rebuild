@@ -42,7 +42,7 @@ export function SiteFooter() {
               <Logo withTagline />
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-[#C8C8C8]">
-              OrangeRank helps a business get recommended by AI, and puts AI to work on the repetitive jobs inside the business.
+              Two separate practices: getting local businesses found by customers, and AI sales teams for companies that sell to other businesses.
             </p>
             <a
               href="mailto:hello@getorangerank.com"

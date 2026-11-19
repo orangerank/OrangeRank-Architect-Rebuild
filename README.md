@@ -2,8 +2,8 @@
 
 Marketing site and AI Visibility Assessment checkout for OrangeRank.
 
-- `/` introduces both offerings. Outreach links can still land here with `?utm_content=<code>`.
-- `/ai-visibility` is the assessment page.
+- `/` is a split entrance for the two offerings. A visit with `?utm_content=<code>` redirects to `/ai-visibility` and keeps the query string.
+- `/ai-visibility` is the assessment page for local businesses.
 - `/get-your-orange-score` is the intake and secure checkout path. Do not rename it.
 - `/ai-workforce-systems` is the AI Workforce Systems page. The discovery CTA is `mailto:hello@getorangerank.com`.
 

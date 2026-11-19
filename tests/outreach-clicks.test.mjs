@@ -4,6 +4,9 @@ import { readFileSync } from 'node:fs'
 import { POST } from '../app/api/outreach-click/route.ts'
 import { GET } from '../app/api/internal/outreach-clicks/route.ts'
 import { CLICK_READ_LIMIT, CLICK_TTL_SECONDS, beaconBody, clickSpan, outreachCode, outreachPath, parseClick, shouldSendClick } from '../lib/outreach/code.ts'
+import { outreachAssessmentRedirect } from '../lib/outreach/landing.ts'
+import { NextRequest } from 'next/server'
+import { proxy } from '../proxy.ts'
 import { CLICK_CODE_DAY_CAP, CLICK_DAY_CAP, CLICK_IP_LIMIT, CLICK_IP_WINDOW_SECONDS, clientAddressKey } from '../lib/outreach/clicks.ts'
 import { LuaRedis } from './helpers/lua-redis.mjs'
 
@@ -99,6 +102,7 @@ test('codes stay short and the beacon sends one click per session', () => {
   assert.equal(outreachPath('/foo?x=1'), null)
   assert.equal(outreachPath('//'), null)
   assert.deepEqual(beaconBody('?utm_source=outreach&utm_medium=email&utm_campaign=fall&utm_content=b18-0001', '/'), { code: 'b18-0001', path: '/' })
+  assert.deepEqual(beaconBody('?utm_content=b18-0001', '/ai-visibility'), { code: 'b18-0001', path: '/ai-visibility' })
   assert.equal(beaconBody('?utm_source=outreach', '/'), null)
   assert.equal(beaconBody('?utm_content=person@example.com', '/'), null)
   const seen = new Map()
@@ -121,6 +125,27 @@ test('codes stay short and the beacon sends one click per session', () => {
   assert.equal(clickSpan('2026-10-24', '2026-10-01'), null)
   assert.equal(parseClick(JSON.stringify({ code: 'b18-0001', path: '/', at: '2026-10-24T00:00:00.000Z', note: 'person@example.com' }), '2026-10-24'), null)
   assert.equal(parseClick({ code: 'b18-0001', path: '/', at: '2026-10-25T00:00:00.000Z' }, '2026-10-24'), null)
+})
+
+test('utm_content on the homepage redirects to the assessment and the beacon still records the code', () => {
+  const search = '?utm_source=outreach&utm_medium=email&utm_content=b18-0001-f2&biz=Acme'
+  assert.equal(outreachAssessmentRedirect('/', search), `/ai-visibility${search}`)
+  assert.equal(outreachAssessmentRedirect('/', ''), null)
+  assert.equal(outreachAssessmentRedirect('/', '?utm_content='), null)
+  assert.equal(outreachAssessmentRedirect('/', '?utm_content=%20'), null)
+  assert.equal(outreachAssessmentRedirect('/ai-visibility', search), null)
+  assert.equal(outreachAssessmentRedirect('/get-your-orange-score', search), null)
+  const request = new NextRequest(`https://www.getorangerank.com/${search}`)
+  const response = proxy(request)
+  assert.equal(response.status, 307)
+  const location = new URL(response.headers.get('location'))
+  assert.equal(location.pathname, '/ai-visibility')
+  assert.equal(location.search, search)
+  assert.deepEqual(beaconBody(location.search, location.pathname), { code: 'b18-0001-f2', path: '/ai-visibility' })
+  const plain = proxy(new NextRequest('https://www.getorangerank.com/'))
+  assert.equal(plain.headers.get('location'), null)
+  assert.match(readFileSync('app/layout.tsx', 'utf8'), /<OutreachClickBeacon \/>/)
+  assert.equal(/one place to start|paid starting point/i.test(readFileSync('app/page.tsx', 'utf8')), false)
 })
 
 test('a same-origin click stores only the code, page, and time', async () => {

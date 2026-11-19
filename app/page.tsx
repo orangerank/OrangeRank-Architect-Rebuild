@@ -7,13 +7,11 @@ import { CtaLink } from '@/components/site/cta-link'
 import { Container } from '@/components/site/section-heading'
 
 export const metadata: Metadata = {
-  title: 'OrangeRank — Be the business AI recommends.',
+  title: 'OrangeRank — Puts AI to work for your business.',
   description:
-    'OrangeRank offers an AI Visibility Assessment and AI Workforce Systems. See how ChatGPT, Gemini, Claude and Perplexity recommend your business, or put a checked AI team to work inside it.',
+    'OrangeRank has two separate practices. Local businesses get found by customers through an AI Visibility Assessment. Companies that sell to other businesses get a 7-agent AI sales team.',
   alternates: { canonical: '/' },
 }
-
-const assistants = 'ChatGPT, Gemini, Claude, Perplexity and Google AI Overviews'
 
 export default function HomePage() {
   return (
@@ -21,75 +19,56 @@ export default function HomePage() {
       <SiteHeader />
       <main>
         <section aria-labelledby="home-title" className="border-b border-white/[0.08] bg-black">
-          <Container className="py-16 sm:py-24">
+          <Container className="py-16 sm:py-20">
             <p className="text-sm font-semibold uppercase tracking-[0.18em] text-brand">OrangeRank</p>
             <h1 id="home-title" className="mt-4 max-w-4xl text-4xl font-bold leading-[1.05] tracking-tight text-white sm:text-6xl">
-              Be the business AI recommends.
+              OrangeRank puts AI to work for your business.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-[#C8C8C8]">
-              Two ways to work with OrangeRank. Find out how AI recommends businesses like yours, or put specialized AI agents to work on the repetitive jobs inside the business.
+              Two separate practices, for two different buyers. Local businesses use OrangeRank to get found by customers. Companies that sell to other businesses use it to build pipeline.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <CtaLink href="/get-your-orange-score" size="lg" className="w-full sm:w-auto">
-                Get Your Orange Score
-                <ArrowRight className="size-4" aria-hidden="true" />
-              </CtaLink>
-              <CtaLink href="/ai-workforce-systems" variant="secondary" size="lg" className="w-full sm:w-auto">
-                AI Workforce Systems
-              </CtaLink>
-            </div>
           </Container>
         </section>
 
-        <section aria-labelledby="offerings-title" className="bg-black py-16 sm:py-24">
+        <section aria-label="Offerings" className="bg-black py-12 sm:py-16">
           <Container>
-            <h2 id="offerings-title" className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-              Two offerings. One place to start.
-            </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#C8C8C8] sm:text-lg">
-              The assessment is the paid starting point available today. AI Workforce Systems is scoped with you after a discovery call.
-            </p>
-            <div className="mt-10 grid gap-6 lg:grid-cols-2">
-              <article className="flex flex-col rounded-3xl border border-brand/50 bg-black p-6 sm:p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Available now</p>
-                <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">AI Visibility Assessment</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#C8C8C8] sm:text-base">
-                  We run 100+ real AI searches, then research the business&apos;s website, listings and competitors. You get a 14-page report with your Orange Score and a step-by-step fix plan.
-                </p>
-                <p className="mt-4 text-sm leading-relaxed text-white">
-                  Platforms: {assistants}.
+            <div className="grid items-stretch gap-6 lg:grid-cols-2">
+              <article className="flex h-full flex-col rounded-3xl border border-white/[0.12] bg-black p-6 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">Local businesses</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">Get found by customers</h2>
+                <p className="mt-4 text-base leading-relaxed text-[#C8C8C8]">
+                  For local, consumer-facing businesses that want customers to find them through AI. The AI Visibility Assessment runs 100+ real AI searches, then researches the website, listings and competitors. You get a 14-page report with your Orange Score and a step-by-step fix plan.
                 </p>
                 <p className="mt-4 text-sm font-semibold text-white">
                   <span className="text-brand">$149</span> · one-time · secure checkout
                 </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <CtaLink href="/get-your-orange-score" className="w-full sm:w-auto">
+                <div className="mt-auto flex flex-col gap-3 pt-8">
+                  <CtaLink href="/get-your-orange-score" size="lg" className="w-full">
                     Get Your Orange Score
+                    <ArrowRight className="size-4" aria-hidden="true" />
                   </CtaLink>
-                  <Link href="/ai-visibility" className="inline-flex h-10 items-center justify-center rounded-full px-2 text-sm font-semibold text-white underline decoration-brand/70 underline-offset-4 hover:decoration-brand">
+                  <Link href="/ai-visibility" className="inline-flex h-10 items-center justify-center text-sm font-semibold text-white underline decoration-brand/70 underline-offset-4 hover:decoration-brand">
                     See the assessment
                   </Link>
                 </div>
               </article>
 
-              <article className="flex flex-col rounded-3xl border border-white/[0.08] bg-[#111111] p-6 sm:p-8">
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#C8C8C8]">Build and run</p>
-                <h3 className="mt-3 text-2xl font-bold tracking-tight text-white">AI Workforce Systems</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#C8C8C8] sm:text-base">
-                  We design, build, and run teams of specialized AI agents that do real, repeatable work inside your business, connected to your tools and checked by your people.
+              <article className="flex h-full flex-col rounded-3xl border border-white/[0.12] bg-black p-6 sm:p-8">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand">B2B companies</p>
+                <h2 className="mt-3 text-3xl font-bold tracking-tight text-white">Get more B2B deals</h2>
+                <p className="mt-4 text-base leading-relaxed text-[#C8C8C8]">
+                  For companies that sell to other businesses and need more pipeline. A 7-agent AI sales team finds, qualifies and pitches prospects, with your approval on every send.
                 </p>
-                <p className="mt-4 text-sm leading-relaxed text-white">
-                  Scoped after discovery: one-time build plus monthly management.
-                </p>
-                <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <p className="mt-4 text-sm font-semibold text-white">AI Workforce Systems</p>
+                <div className="mt-auto flex flex-col gap-3 pt-8">
                   <a
                     href="mailto:hello@getorangerank.com"
-                    className="inline-flex h-10 w-full items-center justify-center rounded-full border border-white/15 px-5 text-sm font-semibold text-white hover:border-white/30 sm:w-auto"
+                    className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-brand px-6 text-[15px] font-semibold text-black hover:bg-brand-light"
                   >
                     Book a discovery call
                   </a>
-                  <Link href="/ai-workforce-systems" className="inline-flex h-10 items-center justify-center rounded-full px-2 text-sm font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-white">
-                    Read how it works
+                  <Link href="/ai-workforce-systems" className="inline-flex h-10 items-center justify-center text-sm font-semibold text-white underline decoration-brand/70 underline-offset-4 hover:decoration-brand">
+                    See AI Workforce Systems
                   </Link>
                 </div>
               </article>

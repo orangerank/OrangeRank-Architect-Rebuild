@@ -30,7 +30,7 @@ export function Hero() {
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(300px,0.9fr)] lg:gap-12">
           <div className="min-w-0">
             <p className="inline-flex rounded-full border border-brand/30 bg-brand/[0.08] px-3 py-1.5 text-[13px] text-brand-light">
-              AI visibility audit for local businesses
+              For local, consumer-facing businesses
             </p>
 
             <h1

@@ -279,7 +279,7 @@ test('Grok paid-assessment validation payload keeps the same fields and bearer h
   assert.equal(seen.body.customer_email, 'private@example.com')
 })
 
-test('homepage still mounts utm tracking, analytics stay production-only, and there are no redirects', () => {
+test('homepage still mounts utm tracking and analytics stay production-only', () => {
   const layout = readFileSync('app/layout.tsx', 'utf8')
   assert.match(layout, /<OutreachClickBeacon \/>/)
   assert.match(layout, /process\.env\.NODE_ENV === 'production' && <Analytics \/>/)
@@ -288,7 +288,6 @@ test('homepage still mounts utm tracking, analytics stay production-only, and th
   const config = readFileSync('next.config.mjs', 'utf8')
   assert.equal(config.includes('async redirects'), false)
   assert.equal(config.includes('async rewrites'), false)
-  assert.equal(existsSync('middleware.ts'), false)
   assert.equal(existsSync('vercel.json'), false)
   const pkg = JSON.parse(readFileSync('package.json', 'utf8'))
   const deps = JSON.stringify({ ...pkg.dependencies, ...pkg.devDependencies })
@@ -299,12 +298,16 @@ test('homepage still mounts utm tracking, analytics stay production-only, and th
 
 test('workforce page keeps confirmed name and email, and the remaining Chris decisions', () => {
   const page = readFileSync('app/ai-workforce-systems/page.tsx', 'utf8')
-  assert.equal((page.match(/TODO\(chris\)/g) || []).length, 5)
+  assert.equal((page.match(/TODO\(chris\)/g) || []).length, 3)
   assert.match(page, /mailto:hello@getorangerank.com/)
   assert.equal(page.includes('chris@getorangerank.com'), false)
   assert.match(page, /AI Workforce Systems/)
   assert.match(page, /Book a discovery call/)
   assert.match(page, /Scoped after discovery: one-time build plus monthly management/)
+  assert.match(page, /Deployed for OrangeRank\\?'s own sales pipeline and for EIP \(Experience Improvement Partners\), plus other companies\./)
+  assert.equal(page.includes('/ai-visibility'), false)
+  assert.equal(page.includes('/get-your-orange-score'), false)
+  assert.equal(/two companies|starting point/i.test(page), false)
   assert.equal(/\$\d/.test(page), false)
-  assert.equal(/\bStripe\b|EIP|Experience Improvement|eip360|Salesforce|HubSpot|revolutionary|\b10x\b|fully autonomous/i.test(page), false)
+  assert.equal(/\bStripe\b|eip360|Salesforce|HubSpot|revolutionary|\b10x\b|fully autonomous/i.test(page), false)
 })

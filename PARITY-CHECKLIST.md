@@ -149,9 +149,9 @@ Names only. Values are not in this repo. `.env.example` documents the empty plac
 
 ## utm_content
 
-`OutreachClickBeacon` is mounted in the root layout, so it runs on `/` and on `/get-your-orange-score`. It reads `utm_content`, keeps codes shaped like `b18-0001` or `b18-0001-f2`, and `POST`s `{ code, path }` to `/api/outreach-click`. The route stores the code, path, and time. It does not store a name, email, IP, or user agent. Outreach prefill params do not consume `utm_*`.
+`OutreachClickBeacon` is mounted in the root layout. It reads `utm_content`, keeps codes shaped like `b18-0001` or `b18-0001-f2`, and `POST`s `{ code, path }` to `/api/outreach-click`. The route stores the code, path, and time. It does not store a name, email, IP, or user agent. Outreach prefill params do not consume `utm_*`. The beacon, code rules, POST body, and route are unchanged from the source.
 
-**Status: ported and verified.** Beacon, parser, and route match the source. A live Redis write from a real email click is unverifiable without the store, but the code path is the same one the outreach tests exercise.
+**Changed.** A request to `/` with a non-empty `utm_content` redirects to `/ai-visibility` and keeps the full query string (`proxy.ts`). Outreach prospects are local businesses, so they see the assessment. The beacon then runs on `/ai-visibility` and records the same code. The stored path is `/ai-visibility` rather than `/`. A visit to `/` with no `utm_content` renders the split homepage and does not redirect. A live Redis write is still unverifiable without the store.
 
 ## Analytics
 
@@ -161,9 +161,9 @@ Names only. Values are not in this repo. `.env.example` documents the empty plac
 
 ## Redirects and rewrites
 
-`next.config.mjs` sets security headers only. It has no `redirects` or `rewrites`. There is no `middleware.ts` and no `vercel.json`.
+`next.config.mjs` sets security headers only. It has no `redirects` or `rewrites`. There is no `vercel.json`.
 
-**Status: ported and verified.**
+**Changed.** The only redirect is the outreach landing rule in `proxy.ts`, described under utm_content. Checkout, intake, webhook, and handoff routes are not redirected.
 
 ## Other routes kept
 
@@ -186,6 +186,6 @@ These files are in the hash manifest and were not edited:
 
 ## Changed
 
-None. No intake field, Checkout Session shape, webhook path, signature check, event list, outbound payload, env var name, click tracker, analytics gate, or redirect was changed.
+- Outreach landing only. `/?utm_content=<code>` redirects to `/ai-visibility` with the query string preserved. The click code is still recorded by the same beacon and the same `/api/outreach-click` route. The stored path for that visit is `/ai-visibility`.
 
-Presentation outside this checklist: official logo files, Montserrat, brand colors, a homepage that introduces both offerings, `/ai-visibility` for the existing assessment page, and `/ai-workforce-systems`. `/` and `/get-your-orange-score` still resolve.
+No intake field, Checkout Session shape, webhook path, signature check, event list, outbound payload, or env var name was changed.
