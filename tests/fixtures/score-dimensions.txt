@@ -1,0 +1,33 @@
+export const scoreDimensions: ScoreDimension[] = [
+  {
+    label: 'Presence',
+    value: 58,
+    weight: 30,
+    description: 'How often AI systems mention you for relevant, high-intent prompts.',
+  },
+  {
+    label: 'Accuracy',
+    value: 81,
+    weight: 20,
+    description: 'Whether facts like services, hours, location and pricing are correct.',
+  },
+  {
+    label: 'Recommendation',
+    value: 53,
+    weight: 25,
+    description: 'How highly you rank when AI is asked for a recommendation.',
+  },
+  {
+    label: 'Sentiment',
+    value: 74,
+    weight: 10,
+    description: 'The tone and framing AI uses when describing your business.',
+  },
+  {
+    label: 'Citation Share',
+    value: 44,
+    weight: 15,
+    description: 'How often your owned sources are cited as evidence.',
+  },
+]
+
