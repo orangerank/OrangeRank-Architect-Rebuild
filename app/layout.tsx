@@ -13,9 +13,9 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://getorangerank.com'),
-  title: 'OrangeRank — Be the business AI recommends.',
+  title: 'OrangeRank — Put the power of AI to work for you.',
   description:
-    'OrangeRank measures how AI systems like ChatGPT, Gemini, Claude, Perplexity and Google AI Overviews see, describe, cite and recommend your business, and builds AI workforce systems for the work inside the business.',
+    'Put the power of AI to work for you. Local businesses use OrangeRank to get found by customers. B2B companies use it to fill their pipeline.',
   keywords: [
     'AI visibility',
     'AI search audit',
@@ -26,9 +26,9 @@ export const metadata: Metadata = {
     'AI Workforce Systems',
   ],
   openGraph: {
-    title: 'OrangeRank — Be the business AI recommends.',
+    title: 'OrangeRank — Put the power of AI to work for you.',
     description:
-      'An AI Visibility Assessment and AI Workforce Systems for businesses that want to be recommended, and to put AI to work.',
+      'Put the power of AI to work for you. Local businesses use OrangeRank to get found by customers. B2B companies use it to fill their pipeline.',
     url: 'https://getorangerank.com',
     siteName: 'OrangeRank',
     type: 'website',

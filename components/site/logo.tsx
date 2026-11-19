@@ -46,7 +46,7 @@ export function Logo({
             tone === 'light' ? 'text-black' : 'text-[#C8C8C8]',
           )}
         >
-          Be the business AI recommends.
+          Put the power of AI to work for you.
         </span>
       )}
     </span>
