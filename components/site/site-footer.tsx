@@ -42,7 +42,7 @@ export function SiteFooter() {
               <Logo withTagline />
             </Link>
             <p className="mt-5 text-sm leading-relaxed text-[#C8C8C8]">
-              Two separate practices: getting local businesses found by customers, and AI sales teams for companies that sell to other businesses.
+              Local businesses use us to get found by customers. B2B companies use us to fill their pipeline.
             </p>
             <a
               href="mailto:hello@getorangerank.com"
